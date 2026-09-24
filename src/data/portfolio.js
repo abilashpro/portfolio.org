@@ -70,9 +70,9 @@ export const stats = [
 
 export const experience = {
   position: 'Frontend / React.js Developer',
-  company: 'Company Name', // PLACEHOLDER
-  period: 'Start Date – Present', // PLACEHOLDER
-  location: 'Location', // PLACEHOLDER
+  company: 'Misfits Change Makers Pvt Limited',
+  period: '24 March 01 – Present',
+  location: 'Chennai',
   groups: [
     {
       title: 'React & UI Development',
