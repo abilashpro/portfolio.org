@@ -11,6 +11,7 @@ import ResumeCTA from './components/ResumeCTA'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import BackToTop from './components/ui/BackToTop'
+import MusicToggle from './components/ui/MusicToggle'
 import ScrollProgress from './components/ui/ScrollProgress'
 import TechMarquee from './components/ui/TechMarquee'
 import { CursorGlow } from './components/ui/Motion'
@@ -41,6 +42,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <MusicToggle />
       <BackToTop />
     </>
   )

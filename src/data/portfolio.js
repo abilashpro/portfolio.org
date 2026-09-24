@@ -32,6 +32,10 @@ export const links = {
   resume: asset('/Abilash.pdf'),
 }
 
+// Background music. Leave '' to use the built-in generated ambient soundtrack,
+// or drop an MP3 in /public and set e.g. asset('/music.mp3').
+export const backgroundMusic = ''
+
 export const navItems = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },

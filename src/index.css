@@ -24,6 +24,7 @@
   --animate-spin-slow: spin 24s linear infinite;
   --animate-beam: beam 7s ease-in-out infinite;
   --animate-twinkle: twinkle 4s ease-in-out infinite;
+  --animate-eq: eq 0.9s ease-in-out infinite alternate;
   --animate-marquee-reverse: marquee 48s linear infinite reverse;
 
   @keyframes float {
@@ -65,6 +66,15 @@
     }
     50% {
       background-position: 100% 50%;
+    }
+  }
+
+  @keyframes eq {
+    0% {
+      transform: scaleY(0.25);
+    }
+    100% {
+      transform: scaleY(1);
     }
   }
 
@@ -137,6 +147,21 @@
   h4 {
     @apply font-display tracking-tight text-white;
     text-wrap: balance;
+  }
+
+  /* Tailwind v4 dropped the pointer cursor on buttons — restore it site-wide. */
+  button,
+  [role='button'],
+  [role='tab'],
+  select,
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled='true'] {
+    cursor: not-allowed;
   }
 
   ::selection {
