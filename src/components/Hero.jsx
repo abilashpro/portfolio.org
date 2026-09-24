@@ -55,7 +55,13 @@ function HeroVisual() {
           <pre className="overflow-x-auto px-4 py-6 font-mono text-[0.72rem] leading-7 sm:px-6 sm:text-[0.82rem]">
             <code>
               {codeLines.map((line, i) => (
-                <div key={i} className="flex">
+                <motion.div
+                  key={i}
+                  initial={reduce ? false : { opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.45, delay: reduce ? 0 : 0.55 + i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex"
+                >
                   <span className="mr-5 w-4 shrink-0 text-right text-slate-700 select-none">{i + 1}</span>
                   <span className="whitespace-pre">
                     {line.map(([cls, text], j) => (
@@ -64,7 +70,7 @@ function HeroVisual() {
                       </span>
                     ))}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </code>
           </pre>
