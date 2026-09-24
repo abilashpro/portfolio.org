@@ -1,0 +1,279 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Geist', 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Near-black surfaces with a faint blue cast */
+  --color-ink-950: #05070a;
+  --color-ink-900: #0a0d12;
+  --color-ink-850: #0e1218;
+  --color-ink-800: #12171f;
+  --color-ink-700: #1a202a;
+
+  --shadow-soft: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -24px rgb(0 0 0 / 0.8);
+  --shadow-lift: 0 1px 0 0 rgb(255 255 255 / 0.06) inset, 0 30px 60px -30px rgb(16 185 129 / 0.35);
+  --shadow-glow: 0 0 0 1px rgb(52 211 153 / 0.35), 0 8px 30px -6px rgb(16 185 129 / 0.55);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 8s ease-in-out infinite;
+  --animate-blob: blob 18s ease-in-out infinite;
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-gradient: gradient-shift 8s ease infinite;
+  --animate-spin-slow: spin 24s linear infinite;
+  --animate-beam: beam 7s ease-in-out infinite;
+  --animate-twinkle: twinkle 4s ease-in-out infinite;
+  --animate-marquee-reverse: marquee 48s linear infinite reverse;
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes blob {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(30px, -40px) scale(1.08);
+    }
+    66% {
+      transform: translate(-25px, 20px) scale(0.95);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes gradient-shift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.1;
+      transform: scale(0.6);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes beam {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: translateX(-4%) rotate(var(--r, 0deg));
+    }
+    50% {
+      opacity: 0.8;
+      transform: translateX(4%) rotate(var(--r, 0deg));
+    }
+  }
+}
+
+/* Animatable angle for the rotating gradient borders */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink-950 font-sans text-slate-400 antialiased;
+    overflow-x: hidden;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+  /* Film grain over everything — adds depth to flat dark surfaces */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight text-white;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    @apply bg-emerald-400/30 text-white;
+  }
+
+  :focus-visible {
+    @apply rounded-md outline-2 outline-offset-2 outline-emerald-400;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@utility container-page {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility section {
+  @apply py-20 sm:py-24 lg:py-32;
+}
+
+@utility btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium whitespace-nowrap transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-400 sm:text-[0.9375rem];
+}
+
+@utility btn-primary {
+  @apply btn relative overflow-hidden bg-gradient-to-r from-emerald-400 to-cyan-400 font-semibold text-ink-950 shadow-[0_0_0_1px_rgb(52_211_153/0.5),0_8px_30px_-8px_rgb(16_185_129/0.7)] hover:-translate-y-0.5 hover:shadow-[0_0_0_1px_rgb(52_211_153/0.8),0_12px_40px_-6px_rgb(16_185_129/0.85)];
+
+  /* Light sweep across the button on hover */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.55) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.7s ease;
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    transform: translateX(120%);
+  }
+}
+
+@utility btn-secondary {
+  @apply btn border border-white/10 bg-white/[0.04] text-white backdrop-blur hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.08];
+}
+
+@utility btn-ghost {
+  @apply btn text-slate-300 hover:bg-white/[0.06] hover:text-white;
+}
+
+@utility card {
+  @apply rounded-3xl border border-white/[0.07] bg-gradient-to-b from-white/[0.04] to-white/[0.015] shadow-soft;
+}
+
+@utility chip {
+  @apply inline-flex items-center rounded-full border border-white/[0.08] bg-white/[0.03] px-2.5 py-1 font-mono text-[0.72rem] text-slate-300;
+}
+
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/[0.06] px-3 py-1 font-mono text-[0.7rem] font-medium tracking-[0.14em] text-emerald-300 uppercase;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility bg-dots {
+  background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@utility text-gradient {
+  @apply bg-gradient-to-r from-emerald-300 via-cyan-300 to-emerald-300 bg-clip-text text-transparent;
+  background-size: 200% auto;
+}
+
+/* Soft white → grey fade for big headlines */
+@utility text-metal {
+  @apply bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-transparent;
+}
+
+@utility mask-fade-x {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Rotating gradient hairline border. Parent needs a border-radius. */
+@utility glow-border {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: conic-gradient(
+      from var(--angle),
+      transparent 0%,
+      transparent 55%,
+      rgb(52 211 153 / 0.9) 72%,
+      rgb(34 211 238 / 0.9) 82%,
+      transparent 95%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: spin-angle 6s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* Skeleton bars used in device / preview mockups */
+@utility sk {
+  @apply rounded bg-slate-200;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
