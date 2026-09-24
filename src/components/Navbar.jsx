@@ -80,7 +80,6 @@ export default function Navbar() {
             </span>
             <span>
               {profile.name}
-              <span className="text-emerald-400">.</span>
             </span>
           </a>
 

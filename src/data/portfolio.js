@@ -142,10 +142,10 @@ export const experience = {
 export const projects = [
   {
     id: 'promo',
-    name: 'Promo',
+    name: 'Promzivo',
     badge: 'Fully Responsive',
     description:
-      'Promo is a responsive web project focused on creating a clean and modern user interface that works smoothly across desktop, tablet, and mobile devices.',
+      'Promzivo is a responsive web project focused on creating a clean and modern user interface that works smoothly across desktop, tablet, and mobile devices.',
     highlights: [
       'Responsive web design',
       'Mobile-first layouts',
@@ -167,10 +167,10 @@ export const projects = [
   },
   {
     id: 'dorsin',
-    name: 'Dorsin',
+    name: 'Darsin',
     badge: 'Responsive Mobile Design',
     description:
-      'Dorsin is a responsive web project where I focused on transforming the interface into a clean, responsive experience across desktop, tablet, and mobile screen sizes.',
+      'Darsin is a responsive web project where I focused on transforming the interface into a clean, responsive experience across desktop, tablet, and mobile screen sizes.',
     highlights: [
       'Responsive mobile view',
       'Desktop responsiveness',
